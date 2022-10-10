@@ -11,7 +11,7 @@ main:
     add  t0, zero,zero     #i=0
     add  t1, zero,zero     #Left sum
     add  t2, zero,s3       #Right sum
-    add  s3, zero,s2       
+    add  s3, zero,s2
 sumLoop:
     lw   t3, 0(s3)         #nums[i]
     add  t2, t2,t3         #rightSum += nums[i]
@@ -25,11 +25,18 @@ findLoop:
     lw   t3, 0(s3)         #nums[i]
     sub  t2, t2, t3        #rightSum -= nums[i]
     beq  t1, t2, foundPI   #leftSum == rightSum
-    add  t1, t2, t3        #leftSum += nums[i]
+    add  t1, t1, t3        #leftSum += nums[i]
     addi t0, t0, 1         #i++
+    addi s3, s3, 4         #Pointer sheft
     blt  t0, s1, findLoop
 
     addi s4, zero, -1      #Not found
+    j printAns
+    
+foundPI:
+    add  s4, t0, zero
+    j printAns
+    
 printAns:
     la a0, str             #String
     li a7, 4               #Print string
@@ -39,7 +46,3 @@ printAns:
     ecall
     li a7, 10              #End program
     ecall
-
-foundPI:
-    add  s4, t0, zero
-    j printAns
