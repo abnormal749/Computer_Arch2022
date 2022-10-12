@@ -10,7 +10,7 @@ main:
     la   s2, input
     add  t0, zero,zero     #i=0
     add  t1, zero,zero     #Left sum
-    add  t2, zero,s3       #Right sum
+    add  t2, zero,zero     #Right sum
     add  s3, zero,s2
 sumLoop:
     lw   t3, 0(s3)         #nums[i]
